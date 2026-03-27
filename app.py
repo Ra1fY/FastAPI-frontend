@@ -33,6 +33,8 @@ st.set_page_config(
 )
 
 # Инициализация сессии
+if 'editing_task_id' not in st.session_state:
+    st.session_state.editing_task_id = None
 if 'token' not in st.session_state:
     st.session_state.token = None
 if 'username' not in st.session_state:
@@ -402,7 +404,9 @@ def show_tasks_list():
                 
                 with col4:
                     if st.button(f"✏️", key=f"edit_{task['id']}", help="Редактировать"):
-                        show_edit_task(task)
+                        # Сохраняем ID задачи для редактирования
+                        st.session_state.editing_task_id = task['id']
+                        st.rerun()
                     if st.button(f"🗑️", key=f"delete_{task['id']}", help="Удалить"):
                         delete_response = make_request("DELETE", f"/api/tasks/{task['id']}")
                         if delete_response and delete_response.status_code == 200:
@@ -410,6 +414,13 @@ def show_tasks_list():
                             st.rerun()
                 
                 st.divider()
+        
+        # Показываем форму редактирования, если есть задача для редактирования
+        if st.session_state.get('editing_task_id'):
+            task_to_edit = next((t for t in tasks if t['id'] == st.session_state.editing_task_id), None)
+            if task_to_edit:
+                st.divider()
+                show_edit_task(task_to_edit)
 
 def show_create_task():
     """Создание задачи"""
@@ -518,9 +529,9 @@ def show_statistics():
 
 def show_edit_task(task):
     """Диалог редактирования задачи"""
+    st.subheader(f"✏️ Редактирование: {task['title']}")
+    
     with st.form(f"edit_task_form_{task['id']}"):
-        st.subheader(f"✏️ Редактирование: {task['title']}")
-        
         title = st.text_input("Название", value=task['title'])
         description = st.text_area("Описание", value=task.get('description', ''))
         
@@ -545,16 +556,15 @@ def show_edit_task(task):
             response = make_request("PUT", f"/api/tasks/{task['id']}", json=update_data)
             if response and response.status_code == 200:
                 st.success("✅ Задача обновлена")
+                del st.session_state.editing_task_id
                 st.rerun()
             else:
                 st.error("❌ Ошибка при обновлении")
     
+    # Кнопка отмены вне формы
     if st.button("❌ Отмена", use_container_width=True):
+        del st.session_state.editing_task_id
         st.rerun()
-    
-    with st.form(f"cancel_form_{task['id']}"):
-        if st.form_submit_button("❌ Отмена", use_container_width=True):
-            st.rerun()
 
 # Запуск приложения
 if st.session_state.token and st.session_state.username:
