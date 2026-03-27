@@ -8,7 +8,7 @@
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 2rem;
     border-radius: 15px;
-    color: white;
+    color: rgb(0, 0, 0);
     text-align: center;
     margin-bottom: 2rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -49,7 +49,7 @@
 
 /* Карточки задач */
 .task-card {
-    background-color: white;
+    background-color: rgb(0, 0, 0);
     padding: 1.2rem;
     border-radius: 12px;
     margin-bottom: 1rem;
@@ -113,17 +113,17 @@
 
 .status-progress {
     background-color: #17a2b8;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .status-completed {
     background-color: #28a745;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 /* Статистические карточки */
 .stat-card {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    background: linear-gradient(135deg, #000000 0%, #000000 100%);
     padding: 1.5rem;
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -170,7 +170,7 @@
 .stTextArea > div > div > textarea,
 .stSelectbox > div > div {
     border-radius: 8px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #000000;
     transition: all 0.3s ease;
 }
 
@@ -188,7 +188,7 @@
 .sidebar-user {
     text-align: center;
     padding: 1rem;
-    background: white;
+    background: rgb(0, 0, 0);
     border-radius: 12px;
     margin-bottom: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -202,7 +202,7 @@
 /* Табы */
 .stTabs [data-baseweb="tab-list"] {
     gap: 2rem;
-    background-color: #f8f9fa;
+    background-color: #000000;
     padding: 0.5rem;
     border-radius: 12px;
 }
