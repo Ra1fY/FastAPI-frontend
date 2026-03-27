@@ -40,10 +40,14 @@ if 'username' not in st.session_state:
 
 def make_request(method, endpoint, **kwargs):
     """Универсальная функция для запросов к API"""
-    headers = {"Content-Type": "application/json"}
+    headers = {}
+    
+    # Добавляем токен если есть
     if st.session_state.token:
         headers["Authorization"] = f"Bearer {st.session_state.token}"
     
+    if "json" in kwargs:
+        headers["Content-Type"] = "application/json"
     url = f"{API_URL}{endpoint}"
     
     try:
