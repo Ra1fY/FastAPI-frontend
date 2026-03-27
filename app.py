@@ -100,7 +100,7 @@ def login_page():
     
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        st.markdown('<div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">', unsafe_allow_html=True)
+        # st.markdown('<div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">', unsafe_allow_html=True)
         
         tab1, tab2 = st.tabs(["🔑 Вход", "📝 Регистрация"])
         
@@ -143,7 +143,7 @@ def login_page():
                         response = make_request(
                             "POST",
                             "/api/register",
-                            json={
+                            data={
                                 "username": new_username,
                                 "email": email,
                                 "password": new_password
