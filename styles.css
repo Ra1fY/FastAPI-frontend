@@ -182,7 +182,7 @@
 
 /* Боковая панель */
 .css-1d391kg {
-    background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+    background: linear-gradient(180deg, #000000 0%, #000000 100%);
 }
 
 .sidebar-user {
@@ -253,7 +253,7 @@ hr {
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #000000;
     border-radius: 10px;
 }
 
