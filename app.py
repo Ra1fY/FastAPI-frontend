@@ -22,8 +22,7 @@ def load_css():
 load_css()
 
 # Конфигурация API
-# Для Streamlit Cloud - secrets, для локальной разработки - localhost
-API_URL = st.secrets.get("API_URL", "http://localhost:8000")
+API_URL = "https://fastapi-jonsonsbaby.amvera.io/"
 
 # Настройка страницы
 st.set_page_config(
