@@ -143,7 +143,7 @@ def login_page():
                         response = make_request(
                             "POST",
                             "/api/register",
-                            data={
+                            json={
                                 "username": new_username,
                                 "email": email,
                                 "password": new_password
