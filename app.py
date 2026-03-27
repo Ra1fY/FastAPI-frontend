@@ -518,10 +518,9 @@ def show_statistics():
 
 def show_edit_task(task):
     """Диалог редактирования задачи"""
-    st.subheader(f"✏️ Редактирование: {task['title']}")
-    
-    # Форма для редактирования
-    with st.form(f"edit_form_{task['id']}"):
+    with st.form(f"edit_task_form_{task['id']}"):
+        st.subheader(f"✏️ Редактирование: {task['title']}")
+        
         title = st.text_input("Название", value=task['title'])
         description = st.text_area("Описание", value=task.get('description', ''))
         
@@ -536,23 +535,23 @@ def show_edit_task(task):
         with col2:
             priority = st.slider("Приоритет", 1, 5, value=task['priority'])
         
-        col1, col2 = st.columns(2)
-        with col1:
-            if st.form_submit_button("💾 Сохранить", use_container_width=True):
-                update_data = {
-                    "title": title,
-                    "description": description,
-                    "status": status,
-                    "priority": priority
-                }
-                response = make_request("PUT", f"/api/tasks/{task['id']}", json=update_data)
-                if response and response.status_code == 200:
-                    st.success("✅ Задача обновлена")
-                    st.rerun()
-                else:
-                    st.error("❌ Ошибка при обновлении")
+        if st.form_submit_button("💾 Сохранить", use_container_width=True):
+            update_data = {
+                "title": title,
+                "description": description,
+                "status": status,
+                "priority": priority
+            }
+            response = make_request("PUT", f"/api/tasks/{task['id']}", json=update_data)
+            if response and response.status_code == 200:
+                st.success("✅ Задача обновлена")
+                st.rerun()
+            else:
+                st.error("❌ Ошибка при обновлении")
     
-    # Отдельная форма для отмены (без полей)
+    if st.button("❌ Отмена", use_container_width=True):
+        st.rerun()
+    
     with st.form(f"cancel_form_{task['id']}"):
         if st.form_submit_button("❌ Отмена", use_container_width=True):
             st.rerun()
